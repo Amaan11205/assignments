@@ -1,0 +1,32 @@
+import heapq
+
+freq = [5, 9, 12, 13, 16, 45]
+char = ['A', 'B', 'C', 'D', 'E', 'F']
+
+heap = []
+
+for i in range(len(char)):
+    heap.append((freq[i], char[i]))
+
+heapq.heapify(heap)
+
+while len(heap) > 1:
+
+    a = heapq.heappop(heap)
+    b = heapq.heappop(heap)
+
+    new = (a[0] + b[0], a, b)
+
+    heapq.heappush(heap, new)
+  
+def print_codes(node, code=""):
+
+    if isinstance(node[1], str):
+        print(node[1], ":", code)
+        return
+
+    print_codes(node[1], code + "0")
+    print_codes(node[2], code + "1")
+
+
+print_codes(heap[0])
